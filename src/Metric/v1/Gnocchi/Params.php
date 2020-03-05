@@ -1,14 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Metric\v1\Gnocchi;
 
 use OpenStack\Common\Api\AbstractParams;
 
 class Params extends AbstractParams
 {
-    public function resourceType(): array
+    public function resourceType()
     {
         return [
             'location'    => self::URL,
@@ -18,7 +16,7 @@ class Params extends AbstractParams
         ];
     }
 
-    public function sort(): array
+    public function sort()
     {
         return [
             'location'    => self::QUERY,
@@ -27,7 +25,7 @@ class Params extends AbstractParams
         ];
     }
 
-    public function criteria(): array
+    public function criteria()
     {
         return [
             'location'    => self::RAW,
@@ -36,7 +34,7 @@ class Params extends AbstractParams
         ];
     }
 
-    public function headerContentType(): array
+    public function headerContentType()
     {
         return [
             'location'    => self::HEADER,
@@ -47,7 +45,7 @@ class Params extends AbstractParams
         ];
     }
 
-    public function idUrl($type): array
+    public function idUrl($type)
     {
         return [
             'required'    => true,
@@ -56,7 +54,7 @@ class Params extends AbstractParams
         ];
     }
 
-    public function granularity(): array
+    public function granularity()
     {
         return [
             'location'    => self::QUERY,
@@ -65,7 +63,7 @@ class Params extends AbstractParams
         ];
     }
 
-    public function aggregation(): array
+    public function aggregation()
     {
         return [
             'location' => self::QUERY,
@@ -73,7 +71,7 @@ class Params extends AbstractParams
         ];
     }
 
-    private function measureTimestamp(string $sentAs): array
+    private function measureTimestamp($sentAs)
     {
         return [
             'location'    => self::QUERY,
@@ -83,12 +81,12 @@ class Params extends AbstractParams
         ];
     }
 
-    public function measureStart(): array
+    public function measureStart()
     {
         return $this->measureTimestamp('start');
     }
 
-    public function measureStop(): array
+    public function measureStop()
     {
         return $this->measureTimestamp('stop');
     }

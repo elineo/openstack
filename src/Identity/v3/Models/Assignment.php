@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Identity\v3\Models;
 
 use OpenStack\Common\Resource\Alias;
@@ -28,7 +26,7 @@ class Assignment extends OperatorResource implements Listable
     /**
      * {@inheritdoc}
      */
-    protected function getAliases(): array
+    protected function getAliases()
     {
         return parent::getAliases() + [
             'role'  => new Alias('role', Role::class),

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Images\v2\Models;
 
 use OpenStack\Common\Resource\Alias;
@@ -46,7 +44,7 @@ class Member extends OperatorResource implements Creatable, Listable, Retrievabl
     /**
      * {@inheritdoc}
      */
-    protected function getAliases(): array
+    protected function getAliases()
     {
         return parent::getAliases() + [
             'created_at' => new Alias('createdAt', \DateTimeImmutable::class),
@@ -54,7 +52,7 @@ class Member extends OperatorResource implements Creatable, Listable, Retrievabl
         ];
     }
 
-    public function create(array $userOptions): Creatable
+    public function create(array $userOptions)
     {
         $response = $this->executeWithState($this->api->postImageMembers());
 

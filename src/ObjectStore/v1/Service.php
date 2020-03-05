@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\ObjectStore\v1;
 
 use OpenStack\Common\Error\BadResponseError;
@@ -17,7 +15,7 @@ class Service extends AbstractService
     /**
      * Retrieves an Account object.
      */
-    public function getAccount(): Account
+    public function getAccount()
     {
         return $this->model(Account::class);
     }
@@ -28,7 +26,7 @@ class Service extends AbstractService
      * @param array         $options {@see \OpenStack\ObjectStore\v1\Api::getAccount}
      * @param callable|null $mapFn   allows a function to be mapped over each element in the collection
      */
-    public function listContainers(array $options = [], callable $mapFn = null): \Generator
+    public function listContainers(array $options = [], callable $mapFn = null)
     {
         $options = array_merge($options, ['format' => 'json']);
 
@@ -41,7 +39,7 @@ class Service extends AbstractService
      *
      * @param string $name The unique name of the container
      */
-    public function getContainer(string $name = null): Container
+    public function getContainer($name = null)
     {
         return $this->model(Container::class, ['name' => $name]);
     }
@@ -51,7 +49,7 @@ class Service extends AbstractService
      *
      * @param array $data {@see \OpenStack\ObjectStore\v1\Api::putContainer}
      */
-    public function createContainer(array $data): Container
+    public function createContainer(array $data)
     {
         return $this->getContainer()->create($data);
     }
@@ -65,7 +63,7 @@ class Service extends AbstractService
      *
      * @throws BadResponseError Thrown for any non 404 status error
      */
-    public function containerExists(string $name): bool
+    public function containerExists($name)
     {
         try {
             $this->execute($this->api->headContainer(), ['name' => $name]);

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Common\Service;
 
 use GuzzleHttp\Client;
@@ -74,7 +72,7 @@ class Builder
      *
      * @throws \Exception
      */
-    public function createService(string $namespace, array $serviceOptions = []): ServiceInterface
+    public function createService($namespace, array $serviceOptions = [])
     {
         $options = $this->mergeOptions($serviceOptions);
 
@@ -86,7 +84,7 @@ class Builder
         return new $serviceClass($options['httpClient'], new $apiClass());
     }
 
-    private function stockHttpClient(array &$options, string $serviceName)
+    private function stockHttpClient(array &$options, $serviceName)
     {
         if (!isset($options['httpClient']) || !($options['httpClient'] instanceof ClientInterface)) {
             if (false !== stripos($serviceName, 'identity')) {
@@ -97,7 +95,7 @@ class Builder
                 $stack                 = $this->getStack($options['authHandler'], $token);
             }
 
-            $microVersion = $options['microVersion'] ?? null;
+            $microVersion = isset($options['microVersion']) ? $options['microVersion'] : null;
 
             $this->addDebugMiddleware($options, $stack);
 
@@ -130,7 +128,7 @@ class Builder
         }
     }
 
-    private function getStack(callable $authHandler, Token $token = null): HandlerStack
+    private function getStack(callable $authHandler, Token $token = null)
     {
         $stack = HandlerStack::create();
         $stack->push(Middleware::authHandler($authHandler, $token));
@@ -138,7 +136,7 @@ class Builder
         return $stack;
     }
 
-    private function httpClient(string $baseUrl, HandlerStack $stack, string $serviceType = null, string $microVersion = null): ClientInterface
+    private function httpClient($baseUrl, HandlerStack $stack, $serviceType = null, $microVersion = null)
     {
         $clientOptions = [
             'base_uri' => Utils::normalizeUrl($baseUrl),
@@ -156,7 +154,7 @@ class Builder
         return new Client($clientOptions);
     }
 
-    private function mergeOptions(array $serviceOptions): array
+    private function mergeOptions(array $serviceOptions)
     {
         $options = array_merge($this->defaults, $this->globalOptions, $serviceOptions);
 

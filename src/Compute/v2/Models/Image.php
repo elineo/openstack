@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Compute\v2\Models;
 
 use OpenStack\Common\Resource\Alias;
@@ -56,7 +54,7 @@ class Image extends OperatorResource implements Listable, Retrievable, Deletable
     /**
      * {@inheritdoc}
      */
-    protected function getAliases(): array
+    protected function getAliases()
     {
         return parent::getAliases() + [
             'created' => new Alias('created', \DateTimeImmutable::class),
@@ -84,7 +82,7 @@ class Image extends OperatorResource implements Listable, Retrievable, Deletable
     /**
      * Retrieves metadata from the API.
      */
-    public function getMetadata(): array
+    public function getMetadata()
     {
         $response = $this->execute($this->api->getImageMetadata(), ['id' => $this->id]);
 
@@ -123,7 +121,7 @@ class Image extends OperatorResource implements Listable, Retrievable, Deletable
      *
      * @return mixed
      */
-    public function getMetadataItem(string $key)
+    public function getMetadataItem($key)
     {
         $response             = $this->execute($this->api->getImageMetadataKey(), ['id' => $this->id, 'key' => $key]);
         $value                = $this->parseMetadata($response)[$key];
@@ -137,7 +135,7 @@ class Image extends OperatorResource implements Listable, Retrievable, Deletable
      *
      * @param string $key {@see \OpenStack\Compute\v2\Api::deleteImageMetadataKey}
      */
-    public function deleteMetadataItem(string $key)
+    public function deleteMetadataItem($key)
     {
         if (isset($this->metadata[$key])) {
             unset($this->metadata[$key]);
@@ -146,7 +144,7 @@ class Image extends OperatorResource implements Listable, Retrievable, Deletable
         $this->execute($this->api->deleteImageMetadataKey(), ['id' => $this->id, 'key' => $key]);
     }
 
-    public function parseMetadata(ResponseInterface $response): array
+    public function parseMetadata(ResponseInterface $response)
     {
         return Utils::jsonDecode($response)['metadata'];
     }

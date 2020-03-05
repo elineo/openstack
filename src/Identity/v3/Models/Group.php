@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Identity\v3\Models;
 
 use OpenStack\Common\Error\BadResponseError;
@@ -42,7 +40,7 @@ class Group extends OperatorResource implements Creatable, Listable, Retrievable
      *
      * @param array $data {@see \OpenStack\Identity\v3\Api::postGroups}
      */
-    public function create(array $data): Creatable
+    public function create(array $data)
     {
         $response = $this->execute($this->api->postGroups(), $data);
 
@@ -78,7 +76,7 @@ class Group extends OperatorResource implements Creatable, Listable, Retrievable
     /**
      * @param array $options {@see \OpenStack\Identity\v3\Api::getGroupUsers}
      */
-    public function listUsers(array $options = []): \Generator
+    public function listUsers(array $options = [])
     {
         $options['id'] = $this->id;
 
@@ -104,7 +102,7 @@ class Group extends OperatorResource implements Creatable, Listable, Retrievable
     /**
      * @param array $options {@see \OpenStack\Identity\v3\Api::headGroupUser}
      */
-    public function checkMembership(array $options): bool
+    public function checkMembership(array $options)
     {
         try {
             $this->execute($this->api->headGroupUser(), ['groupId' => $this->id] + $options);

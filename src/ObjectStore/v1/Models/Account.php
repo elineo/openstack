@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\ObjectStore\v1\Models;
 
 use OpenStack\Common\Resource\HasMetadata;
@@ -36,7 +34,7 @@ class Account extends OperatorResource implements Retrievable, HasMetadata
     /**
      * {@inheritdoc}
      */
-    public function populateFromResponse(ResponseInterface $response): self
+    public function populateFromResponse(ResponseInterface $response)
     {
         parent::populateFromResponse($response);
 
@@ -90,7 +88,7 @@ class Account extends OperatorResource implements Retrievable, HasMetadata
     /**
      * {@inheritdoc}
      */
-    public function getMetadata(): array
+    public function getMetadata()
     {
         $response = $this->execute($this->api->headAccount());
 

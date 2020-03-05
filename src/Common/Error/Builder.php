@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Common\Error;
 
 use GuzzleHttp\Client;
@@ -46,7 +44,7 @@ class Builder
      *
      * @param $name
      */
-    private function header(string $name): string
+    private function header($name)
     {
         return sprintf("%s\n%s\n", $name, str_repeat('~', strlen($name)));
     }
@@ -57,7 +55,7 @@ class Builder
      *
      * @param $link The proposed link
      */
-    private function linkIsValid(string $link): bool
+    private function linkIsValid($link)
     {
         $link = $this->docDomain.$link;
 
@@ -71,7 +69,7 @@ class Builder
     /**
      * @codeCoverageIgnore
      */
-    public function str(MessageInterface $message): string
+    public function str(MessageInterface $message)
     {
         if ($message instanceof RequestInterface) {
             $msg = trim($message->getMethod().' '
@@ -103,7 +101,7 @@ class Builder
      * @param RequestInterface  $request  The faulty request
      * @param ResponseInterface $response The error-filled response
      */
-    public function httpError(RequestInterface $request, ResponseInterface $response): BadResponseError
+    public function httpError(RequestInterface $request, ResponseInterface $response)
     {
         $message = $this->header('HTTP Error');
 
@@ -132,7 +130,7 @@ class Builder
         return $e;
     }
 
-    private function getStatusCodeMessage(int $statusCode): string
+    private function getStatusCodeMessage($statusCode)
     {
         $errors = [
             400 => 'Please ensure that your input values are valid and well-formed. ',
@@ -151,7 +149,7 @@ class Builder
      * @param mixed       $userValue    The incorrect value the user actually provided
      * @param string|null $furtherLink  a link to further information if necessary (optional)
      */
-    public function userInputError(string $expectedType, $userValue, string $furtherLink = null): UserInputError
+    public function userInputError($expectedType, $userValue, $furtherLink = null)
     {
         $message = $this->header('User Input Error');
 

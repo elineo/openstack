@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Common\JsonSchema;
 
 class JsonPatch
@@ -15,7 +13,7 @@ class JsonPatch
         return (new static())->makeDiff($src, $dest);
     }
 
-    public function makeDiff($srcStruct, $desStruct, string $path = ''): array
+    public function makeDiff($srcStruct, $desStruct, $path = '')
     {
         $changes = [];
 
@@ -30,7 +28,7 @@ class JsonPatch
         return $changes;
     }
 
-    protected function handleArray(array $srcStruct, array $desStruct, string $path): array
+    protected function handleArray(array $srcStruct, array $desStruct, $path)
     {
         $changes = [];
 
@@ -55,7 +53,7 @@ class JsonPatch
         return $changes;
     }
 
-    protected function handleObject(\stdClass $srcStruct, \stdClass $desStruct, string $path): array
+    protected function handleObject(\stdClass $srcStruct, \stdClass $desStruct, $path)
     {
         $changes = [];
 
@@ -78,13 +76,13 @@ class JsonPatch
         return $changes;
     }
 
-    protected function shouldPartiallyReplace(\stdClass $o1, \stdClass $o2): bool
+    protected function shouldPartiallyReplace(\stdClass $o1, \stdClass $o2)
     {
         // NOTE: count(stdClass) always returns 1
         return count(array_diff_key((array) $o1, (array) $o2)) < 1;
     }
 
-    protected function arrayDiff(array $a1, array $a2): array
+    protected function arrayDiff(array $a1, array $a2)
     {
         $result = [];
 
@@ -97,7 +95,7 @@ class JsonPatch
         return $result;
     }
 
-    protected function path(string $root, $path): string
+    protected function path($root, $path)
     {
         $path = (string) $path;
 
@@ -108,7 +106,7 @@ class JsonPatch
         return rtrim($root, '/').'/'.ltrim($path, '/');
     }
 
-    protected function makePatch(string $op, string $path, $val = null): array
+    protected function makePatch($op, $path, $val = null)
     {
         switch ($op) {
             default:

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Identity\v2\Models;
 
 use OpenStack\Common\Resource\Alias;
@@ -29,7 +27,7 @@ class Token extends OperatorResource implements \OpenStack\Common\Auth\Token
     /**
      * {@inheritdoc}
      */
-    protected function getAliases(): array
+    protected function getAliases()
     {
         return parent::getAliases() + [
             'tenant'    => new Alias('tenant', Tenant::class),
@@ -41,19 +39,19 @@ class Token extends OperatorResource implements \OpenStack\Common\Auth\Token
     /**
      * {@inheritdoc}
      */
-    public function populateFromResponse(ResponseInterface $response): self
+    public function populateFromResponse(ResponseInterface $response)
     {
         $this->populateFromArray(Utils::jsonDecode($response)['access']['token']);
 
         return $this;
     }
 
-    public function getId(): string
+    public function getId()
     {
         return $this->id;
     }
 
-    public function hasExpired(): bool
+    public function hasExpired()
     {
         return $this->expires <= new \DateTimeImmutable('now', $this->expires->getTimezone());
     }

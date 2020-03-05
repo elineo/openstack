@@ -50,7 +50,7 @@ class Params extends \OpenStack\Networking\v2\Params
         ];
     }
 
-    public function enableSnatJson(): array
+    public function enableSnatJson()
     {
         return [
             'type'        => self::BOOL_TYPE,
@@ -60,14 +60,14 @@ class Params extends \OpenStack\Networking\v2\Params
         ];
     }
 
-    public function ipJson(): array
+    public function ipJson()
     {
         return [
             'type' => self::STRING_TYPE,
         ];
     }
 
-    public function externalFixedIpsJson(): array
+    public function externalFixedIpsJson()
     {
         return [
             'type'     => self::ARRAY_TYPE,
@@ -83,7 +83,7 @@ class Params extends \OpenStack\Networking\v2\Params
         ];
     }
 
-    public function externalGatewayInfo(): array
+    public function externalGatewayInfo()
     {
         return [
             'type'       => self::OBJECT_TYPE,
@@ -96,7 +96,7 @@ class Params extends \OpenStack\Networking\v2\Params
         ];
     }
 
-    public function distributedJson(): array
+    public function distributedJson()
     {
         return [
             'type'        => self::BOOL_TYPE,
@@ -105,7 +105,7 @@ class Params extends \OpenStack\Networking\v2\Params
         ];
     }
 
-    public function haJson(): array
+    public function haJson()
     {
         return [
             'type'        => self::BOOL_TYPE,

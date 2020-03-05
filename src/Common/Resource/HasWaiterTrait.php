@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Common\Resource;
 
 use OpenStack\Common\Error\BadResponseError;
@@ -24,7 +22,7 @@ trait HasWaiterTrait
      *                            or exceed this timeout, the blocking operation will immediately cease.
      * @param int    $sleepPeriod the amount of time to pause between each HTTP request
      */
-    public function waitUntil(string $status, $timeout = 60, int $sleepPeriod = 1)
+    public function waitUntil($status, $timeout = 60, $sleepPeriod = 1)
     {
         $startTime = time();
 
@@ -53,7 +51,7 @@ trait HasWaiterTrait
      *                              is provided, the timeout will never be considered.
      * @param int      $sleepPeriod the amount of time to pause between each HTTP request
      */
-    public function waitWithCallback(callable $fn, $timeout = 60, int $sleepPeriod = 1)
+    public function waitWithCallback(callable $fn, $timeout = 60, $sleepPeriod = 1)
     {
         $startTime = time();
 
@@ -74,10 +72,11 @@ trait HasWaiterTrait
      * Internal method used to identify whether a timeout has been exceeded.
      *
      * @param bool|int $timeout
+     * @param          $startTime
      *
      * @return bool
      */
-    private function shouldHalt($timeout, int $startTime)
+    private function shouldHalt($timeout, $startTime)
     {
         if (false === $timeout) {
             return false;
@@ -99,7 +98,7 @@ trait HasWaiterTrait
         $this->waitUntil('ACTIVE', $timeout);
     }
 
-    public function waitUntilDeleted($timeout = 60, int $sleepPeriod = 1)
+    public function waitUntilDeleted($timeout = 60, $sleepPeriod = 1)
     {
         $startTime = time();
 

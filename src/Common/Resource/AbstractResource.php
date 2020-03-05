@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Common\Resource;
 
 use OpenStack\Common\Transport\Serializable;
@@ -62,7 +60,7 @@ abstract class AbstractResource implements ResourceInterface, Serializable
         $aliases = $this->getAliases();
 
         foreach ($array as $key => $val) {
-            $alias = $aliases[$key] ?? false;
+            $alias = isset($aliases[$key]) ? $aliases[$key] : false;
 
             if ($alias instanceof Alias) {
                 $key = $alias->propertyName;
@@ -82,7 +80,7 @@ abstract class AbstractResource implements ResourceInterface, Serializable
      *
      * @return Alias[]
      */
-    protected function getAliases(): array
+    protected function getAliases()
     {
         $aliases = [];
 
@@ -111,7 +109,7 @@ abstract class AbstractResource implements ResourceInterface, Serializable
         return $output;
     }
 
-    public function model(string $class, $data = null): ResourceInterface
+    public function model($class, $data = null)
     {
         $model = new $class();
 
@@ -130,7 +128,7 @@ abstract class AbstractResource implements ResourceInterface, Serializable
         return $model;
     }
 
-    public function serialize(): \stdClass
+    public function serialize()
     {
         $output = new \stdClass();
 

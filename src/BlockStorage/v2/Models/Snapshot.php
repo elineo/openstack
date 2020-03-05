@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\BlockStorage\v2\Models;
 
 use OpenStack\Common\Resource\Alias;
@@ -62,14 +60,14 @@ class Snapshot extends OperatorResource implements Listable, Creatable, Updateab
     /**
      * {@inheritdoc}
      */
-    protected function getAliases(): array
+    protected function getAliases()
     {
         return parent::getAliases() + [
             'created_at' => new Alias('createdAt', \DateTimeImmutable::class),
         ];
     }
 
-    public function populateFromResponse(ResponseInterface $response): self
+    public function populateFromResponse(ResponseInterface $response)
     {
         parent::populateFromResponse($response);
         $this->metadata = $this->parseMetadata($response);
@@ -86,7 +84,7 @@ class Snapshot extends OperatorResource implements Listable, Creatable, Updateab
     /**
      * @param array $userOptions {@see \OpenStack\BlockStorage\v2\Api::postSnapshots}
      */
-    public function create(array $userOptions): Creatable
+    public function create(array $userOptions)
     {
         $response = $this->execute($this->api->postSnapshots(), $userOptions);
 
@@ -103,7 +101,7 @@ class Snapshot extends OperatorResource implements Listable, Creatable, Updateab
         $this->executeWithState($this->api->deleteSnapshot());
     }
 
-    public function getMetadata(): array
+    public function getMetadata()
     {
         $response       = $this->executeWithState($this->api->getSnapshotMetadata());
         $this->metadata = $this->parseMetadata($response);
@@ -124,7 +122,7 @@ class Snapshot extends OperatorResource implements Listable, Creatable, Updateab
         $this->executeWithState($this->api->putSnapshotMetadata());
     }
 
-    public function parseMetadata(ResponseInterface $response): array
+    public function parseMetadata(ResponseInterface $response)
     {
         $json = Utils::jsonDecode($response);
 

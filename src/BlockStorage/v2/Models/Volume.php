@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\BlockStorage\v2\Models;
 
 use OpenStack\Common\Resource\Alias;
@@ -88,14 +86,14 @@ class Volume extends OperatorResource implements Creatable, Listable, Updateable
     /**
      * {@inheritdoc}
      */
-    protected function getAliases(): array
+    protected function getAliases()
     {
         return parent::getAliases() + [
             'created_at' => new Alias('createdAt', \DateTimeImmutable::class),
         ];
     }
 
-    public function populateFromResponse(ResponseInterface $response): self
+    public function populateFromResponse(ResponseInterface $response)
     {
         parent::populateFromResponse($response);
         $this->metadata = $this->parseMetadata($response);
@@ -112,7 +110,7 @@ class Volume extends OperatorResource implements Creatable, Listable, Updateable
     /**
      * @param array $userOptions {@see \OpenStack\BlockStorage\v2\Api::postVolumes}
      */
-    public function create(array $userOptions): Creatable
+    public function create(array $userOptions)
     {
         $response = $this->execute($this->api->postVolumes(), $userOptions);
 
@@ -130,7 +128,7 @@ class Volume extends OperatorResource implements Creatable, Listable, Updateable
         $this->executeWithState($this->api->deleteVolume());
     }
 
-    public function getMetadata(): array
+    public function getMetadata()
     {
         $response       = $this->executeWithState($this->api->getVolumeMetadata());
         $this->metadata = $this->parseMetadata($response);
@@ -151,7 +149,7 @@ class Volume extends OperatorResource implements Creatable, Listable, Updateable
         $this->executeWithState($this->api->putVolumeMetadata());
     }
 
-    public function parseMetadata(ResponseInterface $response): array
+    public function parseMetadata(ResponseInterface $response)
     {
         $json = Utils::jsonDecode($response);
 
@@ -161,7 +159,7 @@ class Volume extends OperatorResource implements Creatable, Listable, Updateable
     /**
      * Update the bootable status for a volume, mark it as a bootable volume.
      */
-    public function setBootable(bool $bootable = true)
+    public function setBootable($bootable = true)
     {
         $this->execute($this->api->postVolumeBootable(), ['id' => $this->id, 'bootable' => $bootable]);
     }

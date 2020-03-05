@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\ObjectStore\v1\Models;
 
 use GuzzleHttp\Psr7\Uri;
@@ -55,7 +53,7 @@ class StorageObject extends OperatorResource implements Creatable, Deletable, Ha
     /**
      * {@inheritdoc}
      */
-    protected function getAliases(): array
+    protected function getAliases()
     {
         return parent::getAliases() + [
                 'last_modified' => new Alias('lastModified', \DateTimeImmutable::class),
@@ -65,7 +63,7 @@ class StorageObject extends OperatorResource implements Creatable, Deletable, Ha
     /**
      * {@inheritdoc}
      */
-    public function populateFromResponse(ResponseInterface $response): self
+    public function populateFromResponse(ResponseInterface $response)
     {
         parent::populateFromResponse($response);
 
@@ -77,7 +75,7 @@ class StorageObject extends OperatorResource implements Creatable, Deletable, Ha
     /**
      * @return $this
      */
-    private function populateHeaders(ResponseInterface $response): self
+    private function populateHeaders(ResponseInterface $response)
     {
         $this->hash          = $response->getHeaderLine('ETag');
         $this->contentLength = $response->getHeaderLine('Content-Length');
@@ -91,7 +89,7 @@ class StorageObject extends OperatorResource implements Creatable, Deletable, Ha
     /**
      * Retrieves the public URI for this resource.
      */
-    public function getPublicUri(): Uri
+    public function getPublicUri()
     {
         return Utils::addPaths($this->getHttpBaseUrl(), $this->containerName, $this->name);
     }
@@ -101,7 +99,7 @@ class StorageObject extends OperatorResource implements Creatable, Deletable, Ha
      *
      * @return $this
      */
-    public function create(array $data): Creatable
+    public function create(array $data)
     {
         // Override containerName from input params only if local instance contains containerName attr
         if ($this->containerName) {
@@ -138,7 +136,7 @@ class StorageObject extends OperatorResource implements Creatable, Deletable, Ha
      *
      * @param array $data {@see \OpenStack\ObjectStore\v1\Api::getObject}
      */
-    public function download(array $data = []): StreamInterface
+    public function download(array $data = [])
     {
         $data += ['name' => $this->name, 'containerName' => $this->containerName];
 
@@ -199,7 +197,7 @@ class StorageObject extends OperatorResource implements Creatable, Deletable, Ha
     /**
      * {@inheritdoc}
      */
-    public function getMetadata(): array
+    public function getMetadata()
     {
         $response = $this->executeWithState($this->api->headObject());
 

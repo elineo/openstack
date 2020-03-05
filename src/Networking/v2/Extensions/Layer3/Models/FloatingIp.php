@@ -51,7 +51,7 @@ class FloatingIp extends OperatorResource implements Listable, Creatable, Retrie
     protected $resourceKey  = 'floatingip';
     protected $resourcesKey = 'floatingips';
 
-    public function create(array $userOptions): Creatable
+    public function create(array $userOptions)
     {
         $response = $this->execute($this->api->postFloatingIps(), $userOptions);
 
@@ -75,7 +75,7 @@ class FloatingIp extends OperatorResource implements Listable, Creatable, Retrie
         $this->populateFromResponse($response);
     }
 
-    public function associatePort(string $portId)
+    public function associatePort($portId)
     {
         $this->execute($this->api->putFloatingIp(), ['id' => $this->id, 'portId' => $portId]);
     }

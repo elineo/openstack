@@ -1,13 +1,9 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Common\Api;
 
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Promise\Promise;
-use GuzzleHttp\Promise\PromiseInterface;
-use function GuzzleHttp\uri_template;
 use OpenStack\Common\Resource\ResourceInterface;
 use OpenStack\Common\Transport\RequestSerializer;
 use Psr\Http\Message\ResponseInterface;
@@ -58,8 +54,8 @@ trait OperatorTrait
      * {@see Promise} object. In order for this to happen, the called methods need to be in the
      * following format: `createAsync`, where `create` is the sequential method being wrapped.
      *
-     * @param $methodName the name of the method being invoked
-     * @param $args       the arguments to be passed to the sequential method
+     * @param mixed $methodName the name of the method being invoked
+     * @param mixed $args       the arguments to be passed to the sequential method
      *
      * @throws \RuntimeException If method does not exist
      *
@@ -93,7 +89,7 @@ trait OperatorTrait
     /**
      * {@inheritdoc}
      */
-    public function getOperation(array $definition): Operation
+    public function getOperation(array $definition)
     {
         return new Operation($definition);
     }
@@ -103,13 +99,13 @@ trait OperatorTrait
      *
      * @throws \Exception
      */
-    protected function sendRequest(Operation $operation, array $userValues = [], bool $async = false)
+    protected function sendRequest(Operation $operation, array $userValues = [], $async = false)
     {
         $operation->validate($userValues);
 
         $options = (new RequestSerializer())->serializeOptions($operation, $userValues);
         $method  = $async ? 'requestAsync' : 'request';
-        $uri     = uri_template($operation->getPath(), $userValues);
+        $uri     = \GuzzleHttp\uri_template($operation->getPath(), $userValues);
 
         return $this->client->$method($operation->getMethod(), $uri, $options);
     }
@@ -117,7 +113,7 @@ trait OperatorTrait
     /**
      * {@inheritdoc}
      */
-    public function execute(array $definition, array $userValues = []): ResponseInterface
+    public function execute(array $definition, array $userValues = [])
     {
         return $this->sendRequest($this->getOperation($definition), $userValues);
     }
@@ -125,7 +121,7 @@ trait OperatorTrait
     /**
      * {@inheritdoc}
      */
-    public function executeAsync(array $definition, array $userValues = []): PromiseInterface
+    public function executeAsync(array $definition, array $userValues = [])
     {
         return $this->sendRequest($this->getOperation($definition), $userValues, true);
     }
@@ -133,7 +129,7 @@ trait OperatorTrait
     /**
      * {@inheritdoc}
      */
-    public function model(string $class, $data = null): ResourceInterface
+    public function model($class, $data = null)
     {
         $model = new $class($this->client, $this->api);
         // @codeCoverageIgnoreStart

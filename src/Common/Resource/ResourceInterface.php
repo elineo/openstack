@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Common\Resource;
 
 use Psr\Http\Message\ResponseInterface;
@@ -31,5 +29,5 @@ interface ResourceInterface
      *
      * @return \OpenStack\Common\Resource\ResourceInterface
      */
-    public function model(string $class, $data = null): ResourceInterface;
+    public function model($class, $data = null);
 }

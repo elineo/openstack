@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\ObjectStore\v1;
 
 use OpenStack\Common\Api\AbstractParams;
@@ -9,7 +7,7 @@ use Psr\Http\Message\StreamInterface;
 
 class Params extends AbstractParams
 {
-    public function endMarker(): array
+    public function endMarker()
     {
         return [
             'location'    => self::QUERY,
@@ -20,7 +18,7 @@ EOT
         ];
     }
 
-    public function prefix(): array
+    public function prefix()
     {
         return [
             'location'    => self::QUERY,
@@ -31,7 +29,7 @@ EOT
         ];
     }
 
-    public function delimiter(): array
+    public function delimiter()
     {
         return [
             'location'    => self::QUERY,
@@ -41,7 +39,7 @@ EOT
         ];
     }
 
-    public function newest(): array
+    public function newest()
     {
         return [
             'location'    => self::HEADER,
@@ -76,7 +74,7 @@ EOT
         ];
     }
 
-    public function containerName(): array
+    public function containerName()
     {
         return [
             'location'    => self::URL,
@@ -89,7 +87,7 @@ EOT
         ];
     }
 
-    public function path(): array
+    public function path()
     {
         return [
             'location'    => 'query',
@@ -124,7 +122,7 @@ EOT
         ];
     }
 
-    public function syncTo(): array
+    public function syncTo()
     {
         return [
             'location'    => self::HEADER,
@@ -136,7 +134,7 @@ EOT
         ];
     }
 
-    public function syncKey(): array
+    public function syncKey()
     {
         return [
             'location'    => self::HEADER,
@@ -176,7 +174,7 @@ EOT
         ];
     }
 
-    public function versionsLocation(): array
+    public function versionsLocation()
     {
         return [
             'location'    => self::HEADER,
@@ -188,7 +186,7 @@ EOT
         ];
     }
 
-    public function bytesQuota(): array
+    public function bytesQuota()
     {
         return [
             'location'    => self::HEADER,
@@ -200,7 +198,7 @@ EOT
         ];
     }
 
-    public function countQuota(): array
+    public function countQuota()
     {
         return [
             'location'    => self::HEADER,
@@ -212,7 +210,7 @@ EOT
         ];
     }
 
-    public function webDirType(): array
+    public function webDirType()
     {
         return [
             'location'    => self::HEADER,
@@ -226,7 +224,7 @@ EOT
         ];
     }
 
-    public function detectContentType(): array
+    public function detectContentType()
     {
         return [
             'location'    => self::HEADER,
@@ -239,7 +237,7 @@ EOT
         ];
     }
 
-    public function removeVersionsLocation(): array
+    public function removeVersionsLocation()
     {
         return [
             'location'    => self::HEADER,
@@ -248,7 +246,7 @@ EOT
         ];
     }
 
-    public function objectName(): array
+    public function objectName()
     {
         return [
             'location'    => self::URL,
@@ -257,7 +255,7 @@ EOT
         ];
     }
 
-    public function range(): array
+    public function range()
     {
         return [
             'location'    => self::HEADER,
@@ -292,7 +290,7 @@ EOT
         ];
     }
 
-    public function ifMatch(): array
+    public function ifMatch()
     {
         return [
             'location'    => self::HEADER,
@@ -310,7 +308,7 @@ EOT
         ];
     }
 
-    public function ifNoneMatch(): array
+    public function ifNoneMatch()
     {
         return [
             'location'    => self::HEADER,
@@ -329,7 +327,7 @@ EOT
         ];
     }
 
-    public function ifModifiedSince(): array
+    public function ifModifiedSince()
     {
         return [
             'location'    => self::HEADER,
@@ -343,7 +341,7 @@ EOT
         ];
     }
 
-    public function ifUnmodifiedSince(): array
+    public function ifUnmodifiedSince()
     {
         return [
             'location'    => self::HEADER,
@@ -357,7 +355,7 @@ EOT
         ];
     }
 
-    public function deleteAfter(): array
+    public function deleteAfter()
     {
         return [
             'location'    => self::HEADER,
@@ -369,7 +367,7 @@ EOT
         ];
     }
 
-    public function deleteAt(): array
+    public function deleteAt()
     {
         return [
             'location'    => self::HEADER,
@@ -378,7 +376,7 @@ EOT
         ];
     }
 
-    public function contentEncoding(): array
+    public function contentEncoding()
     {
         return [
             'location'    => self::HEADER,
@@ -391,7 +389,7 @@ EOT
         ];
     }
 
-    public function contentDisposition(): array
+    public function contentDisposition()
     {
         return [
             'location'    => self::HEADER,
@@ -403,7 +401,7 @@ EOT
         ];
     }
 
-    public function copyFrom(): array
+    public function copyFrom()
     {
         return [
             'location'    => self::HEADER,
@@ -416,7 +414,7 @@ EOT
         ];
     }
 
-    public function etag(): array
+    public function etag()
     {
         return [
             'location'    => self::HEADER,
@@ -429,7 +427,7 @@ EOT
         ];
     }
 
-    public function contentType(): array
+    public function contentType()
     {
         return [
             'location'    => self::HEADER,
@@ -438,7 +436,7 @@ EOT
         ];
     }
 
-    public function destination(): array
+    public function destination()
     {
         return [
             'location'    => self::HEADER,
@@ -450,7 +448,7 @@ EOT
         ];
     }
 
-    public function freshMetadata(): array
+    public function freshMetadata()
     {
         return [
             'location'    => self::HEADER,
@@ -462,7 +460,7 @@ EOT
         ];
     }
 
-    public function content(): array
+    public function content()
     {
         return [
             'location'    => self::RAW,
@@ -471,7 +469,7 @@ EOT
         ];
     }
 
-    public function stream(): array
+    public function stream()
     {
         return [
             'location'    => self::RAW,
@@ -480,7 +478,7 @@ EOT
         ];
     }
 
-    public function format(): array
+    public function format()
     {
         return [
             'location'    => self::QUERY,
@@ -489,7 +487,7 @@ EOT
         ];
     }
 
-    public function objectManifest(): array
+    public function objectManifest()
     {
         return [
             'location'    => self::HEADER,

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Networking\v2\Models;
 
 use OpenStack\Common\Resource\Alias;
@@ -106,7 +104,7 @@ class LoadBalancerPool extends OperatorResource implements Creatable, Retrievabl
     /**
      * {@inheritdoc}
      */
-    protected function getAliases(): array
+    protected function getAliases()
     {
         return parent::getAliases() + [
             'listeners'      => new Alias('listeners', LoadBalancerListener::class, true),
@@ -118,7 +116,7 @@ class LoadBalancerPool extends OperatorResource implements Creatable, Retrievabl
     /**
      * {@inheritdoc}
      */
-    public function create(array $userOptions): Creatable
+    public function create(array $userOptions)
     {
         $response = $this->execute($this->api->postLoadBalancerPool(), $userOptions);
 
@@ -154,7 +152,7 @@ class LoadBalancerPool extends OperatorResource implements Creatable, Retrievabl
     /**
      * Add a member to this pool.
      */
-    public function addMember(array $userOptions = []): LoadBalancerMember
+    public function addMember(array $userOptions = [])
     {
         $userOptions = array_merge(['poolId' => $this->id], $userOptions);
 
@@ -164,7 +162,7 @@ class LoadBalancerPool extends OperatorResource implements Creatable, Retrievabl
     /**
      * Get an instance of a member.
      */
-    public function getMember(string $memberId): LoadBalancerMember
+    public function getMember($memberId)
     {
         return $this->model(LoadBalancerMember::class, ['poolId' => $this->id, 'id' => $memberId]);
     }
@@ -172,7 +170,7 @@ class LoadBalancerPool extends OperatorResource implements Creatable, Retrievabl
     /**
      * Delete a member.
      */
-    public function deleteMember(string $memberId)
+    public function deleteMember($memberId)
     {
         $this->model(LoadBalancerMember::class, ['poolId' => $this->id, 'id' => $memberId])->delete();
     }
@@ -180,7 +178,7 @@ class LoadBalancerPool extends OperatorResource implements Creatable, Retrievabl
     /**
      * Add a healthmonitor to this load balancer pool.
      */
-    public function addHealthMonitor(array $userOptions = []): LoadBalancerHealthMonitor
+    public function addHealthMonitor(array $userOptions = [])
     {
         $userOptions = array_merge(['poolId' => $this->id], $userOptions);
 

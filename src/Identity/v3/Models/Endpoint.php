@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Identity\v3\Models;
 
 use OpenStack\Common\Resource\Creatable;
@@ -45,7 +43,7 @@ class Endpoint extends OperatorResource implements Creatable, Updateable, Deleta
      *
      * @param array $data {@see \OpenStack\Identity\v3\Api::postEndpoints}
      */
-    public function create(array $data): Creatable
+    public function create(array $data)
     {
         $response = $this->execute($this->api->postEndpoints(), $data);
 
@@ -78,12 +76,12 @@ class Endpoint extends OperatorResource implements Creatable, Updateable, Deleta
         $this->execute($this->api->deleteEndpoint(), $this->getAttrs(['id']));
     }
 
-    public function regionMatches(string $value): bool
+    public function regionMatches($value)
     {
         return in_array($this->region, ['*', $value]);
     }
 
-    public function interfaceMatches(string $value): bool
+    public function interfaceMatches($value)
     {
         return $this->interface && $this->interface == $value;
     }

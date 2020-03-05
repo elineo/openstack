@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Networking\v2\Models;
 
 use OpenStack\Common\Resource\Alias;
@@ -57,7 +55,7 @@ class LoadBalancerStatus extends OperatorResource implements Retrievable
     /**
      * {@inheritdoc}
      */
-    protected function getAliases(): array
+    protected function getAliases()
     {
         return parent::getAliases() + [
             'listeners' => new Alias('listeners', LoadBalancerListener::class, true),

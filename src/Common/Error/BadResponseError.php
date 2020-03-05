@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Common\Error;
 
 use Psr\Http\Message\RequestInterface;
@@ -28,12 +26,12 @@ class BadResponseError extends BaseError
         $this->response = $response;
     }
 
-    public function getRequest(): RequestInterface
+    public function getRequest()
     {
         return $this->request;
     }
 
-    public function getResponse(): ResponseInterface
+    public function getResponse()
     {
         return $this->response;
     }

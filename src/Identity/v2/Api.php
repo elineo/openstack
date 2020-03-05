@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Identity\v2;
 
 use OpenStack\Common\Api\ApiInterface;
@@ -11,7 +9,7 @@ use OpenStack\Common\Api\ApiInterface;
  */
 class Api implements ApiInterface
 {
-    public function postToken(): array
+    public function postToken()
     {
         return [
             'method' => 'POST',
