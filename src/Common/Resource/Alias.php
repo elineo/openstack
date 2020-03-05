@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Common\Resource;
 
 class Alias
@@ -26,7 +24,7 @@ class Alias
      * @param string|null $className    A class name for the property value
      * @param bool        $list         Whether value of the property should be treated as a list or not
      */
-    public function __construct(string $propertyName, string $className = null, bool $list = false)
+    public function __construct($propertyName, $className = null, $list = false)
     {
         $this->isList       = $list;
         $this->propertyName = $propertyName;

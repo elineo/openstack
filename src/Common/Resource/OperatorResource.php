@@ -34,7 +34,7 @@ abstract class OperatorResource extends AbstractResource implements OperatorInte
      * is useful when enumerating over a collection since multiple copies of the same resource class
      * are needed.
      */
-    public function newInstance(): OperatorResource
+    public function newInstance()
     {
         return new static($this->client, $this->api);
     }
@@ -55,7 +55,7 @@ abstract class OperatorResource extends AbstractResource implements OperatorInte
         return $this->execute($definition, $this->getAttrs(array_keys($definition['params'])));
     }
 
-    private function getResourcesKey(): string
+    private function getResourcesKey()
     {
         $resourcesKey = $this->resourcesKey;
 
@@ -70,7 +70,7 @@ abstract class OperatorResource extends AbstractResource implements OperatorInte
     /**
      * {@inheritdoc}
      */
-    public function enumerate(array $def, array $userVals = [], callable $mapFn = null): \Generator
+    public function enumerate(array $def, array $userVals = [], callable $mapFn = null)
     {
         $operation = $this->getOperation($def);
 
@@ -101,7 +101,7 @@ abstract class OperatorResource extends AbstractResource implements OperatorInte
         return $iterator();
     }
 
-    public function extractMultipleInstances(ResponseInterface $response, string $key = null): array
+    public function extractMultipleInstances(ResponseInterface $response, $key = null)
     {
         $key           = $key ?: $this->getResourcesKey();
         $resourcesData = Utils::jsonDecode($response)[$key];
@@ -126,7 +126,7 @@ abstract class OperatorResource extends AbstractResource implements OperatorInte
     /**
      * {@inheritdoc}
      */
-    public function model(string $class, $data = null): ResourceInterface
+    public function model($class, $data = null)
     {
         $model = new $class($this->client, $this->api);
 

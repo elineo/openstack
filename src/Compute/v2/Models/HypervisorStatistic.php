@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Compute\v2\Models;
 
 use OpenStack\Common\Resource\OperatorResource;

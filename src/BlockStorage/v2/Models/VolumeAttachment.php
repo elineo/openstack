@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\BlockStorage\v2\Models;
 
 use OpenStack\Common\Resource\Listable;

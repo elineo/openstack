@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Metric\v1\Gnocchi\Models;
 
 use OpenStack\Common\Resource\OperatorResource;
@@ -102,7 +100,7 @@ class Resource extends OperatorResource implements Retrievable
         $this->populateFromResponse($response);
     }
 
-    public function getMetric(string $metric): Metric
+    public function getMetric($metric)
     {
         $response = $this->execute(
             $this->api->getResourceMetric(),
@@ -120,7 +118,7 @@ class Resource extends OperatorResource implements Retrievable
     /**
      * @param array $options {@see \OpenStack\Metric\v1\Gnocchi\Api::getResourceMetricMeasures}
      */
-    public function getMetricMeasures(array $options = []): array
+    public function getMetricMeasures(array $options = [])
     {
         $options = array_merge(
             $options,
@@ -138,7 +136,7 @@ class Resource extends OperatorResource implements Retrievable
     /**
      * @param array $options {@see \OpenStack\Metric\v1\Gnocchi\Api::getResourceMetrics}
      */
-    public function listResourceMetrics(array $options = []): \Generator
+    public function listResourceMetrics(array $options = [])
     {
         $options['resourceId'] = $this->id;
 

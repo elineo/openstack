@@ -13,7 +13,7 @@ class Api extends AbstractApi
         $this->params = new Params();
     }
 
-    public function postFloatingIps(): array
+    public function postFloatingIps()
     {
         return [
             'method'  => 'POST',
@@ -29,7 +29,7 @@ class Api extends AbstractApi
         ];
     }
 
-    public function getFloatingIps(): array
+    public function getFloatingIps()
     {
         return [
             'method' => 'GET',
@@ -40,7 +40,7 @@ class Api extends AbstractApi
         ];
     }
 
-    public function putFloatingIp(): array
+    public function putFloatingIp()
     {
         return [
             'method'  => 'PUT',
@@ -56,7 +56,7 @@ class Api extends AbstractApi
         ];
     }
 
-    public function getFloatingIp(): array
+    public function getFloatingIp()
     {
         return [
             'method' => 'GET',
@@ -68,7 +68,7 @@ class Api extends AbstractApi
         ];
     }
 
-    public function deleteFloatingIp(): array
+    public function deleteFloatingIp()
     {
         return [
             'method' => 'DELETE',
@@ -79,7 +79,7 @@ class Api extends AbstractApi
         ];
     }
 
-    public function postRouters(): array
+    public function postRouters()
     {
         return [
             'method'  => 'POST',
@@ -96,7 +96,7 @@ class Api extends AbstractApi
         ];
     }
 
-    public function getRouters(): array
+    public function getRouters()
     {
         return [
             'method' => 'GET',
@@ -108,7 +108,7 @@ class Api extends AbstractApi
         ];
     }
 
-    public function putRouter(): array
+    public function putRouter()
     {
         return [
             'method'  => 'PUT',
@@ -123,7 +123,7 @@ class Api extends AbstractApi
         ];
     }
 
-    public function getRouter(): array
+    public function getRouter()
     {
         return [
             'method' => 'GET',
@@ -134,7 +134,7 @@ class Api extends AbstractApi
         ];
     }
 
-    public function deleteRouter(): array
+    public function deleteRouter()
     {
         return [
             'method' => 'DELETE',

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Compute\v2\Models;
 
 use OpenStack\BlockStorage\v2\Models\VolumeAttachment;
@@ -116,7 +114,7 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
     /**
      * {@inheritdoc}
      */
-    protected function getAliases(): array
+    protected function getAliases()
     {
         return parent::getAliases() + [
             'image'   => new Alias('image', Image::class),
@@ -131,7 +129,7 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
      *
      * @param array $userOptions {@see \OpenStack\Compute\v2\Api::postServer}
      */
-    public function create(array $userOptions): Creatable
+    public function create(array $userOptions)
     {
         if (!isset($userOptions['imageId']) && !isset($userOptions['blockDeviceMapping'][0]['uuid'])) {
             throw new \RuntimeException('imageId or blockDeviceMapping.uuid must be set.');
@@ -173,7 +171,7 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
      *
      * @param string $newPassword The new root password
      */
-    public function changePassword(string $newPassword)
+    public function changePassword($newPassword)
     {
         $this->execute($this->api->changeServerPassword(), [
             'id'       => $this->id,
@@ -197,7 +195,7 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
      *
      * @param string $type The type of reboot that will be performed. Either SOFT or HARD is supported.
      */
-    public function reboot(string $type = Enum::REBOOT_SOFT)
+    public function reboot($type = Enum::REBOOT_SOFT)
     {
         if (!in_array($type, ['SOFT', 'HARD'])) {
             throw new \RuntimeException('Reboot type must either be SOFT or HARD');
@@ -249,7 +247,7 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
      *
      * @param array $options {@see \OpenStack\Compute\v2\Api::rescueServer}
      */
-    public function rescue(array $options): string
+    public function rescue(array $options)
     {
         $options['id'] = $this->id;
         $response      = $this->execute($this->api->rescueServer(), $options);
@@ -271,7 +269,7 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
      *
      * @param string $flavorId the UUID of the new flavor your server will be based on
      */
-    public function resize(string $flavorId)
+    public function resize($flavorId)
     {
         $response = $this->execute($this->api->resizeServer(), [
             'id'       => $this->id,
@@ -302,7 +300,7 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
      *
      * @param int $length the number of lines, by default all lines will be returned
      */
-    public function getConsoleOutput(int $length = -1): string
+    public function getConsoleOutput($length = -1)
     {
         $definition = -1 == $length ? $this->api->getAllConsoleOutput() : $this->api->getConsoleOutput();
 
@@ -321,7 +319,7 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
      * @param string $type the type of VNC console: novnc|xvpvnc.
      *                     Defaults to novnc
      */
-    public function getVncConsole($type = Enum::CONSOLE_NOVNC): array
+    public function getVncConsole($type = Enum::CONSOLE_NOVNC)
     {
         $response = $this->execute($this->api->getVncConsole(), ['id' => $this->id, 'type' => $type]);
 
@@ -333,7 +331,7 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
      *
      * @param string $type the type of VNC console: rdp-html5 (default)
      */
-    public function getRDPConsole($type = Enum::CONSOLE_RDP_HTML5): array
+    public function getRDPConsole($type = Enum::CONSOLE_RDP_HTML5)
     {
         $response = $this->execute($this->api->getRDPConsole(), ['id' => $this->id, 'type' => $type]);
 
@@ -345,7 +343,7 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
      *
      * @param string $type the type of VNC console: spice-html5
      */
-    public function getSpiceConsole($type = Enum::CONSOLE_SPICE_HTML5): array
+    public function getSpiceConsole($type = Enum::CONSOLE_SPICE_HTML5)
     {
         $response = $this->execute($this->api->getSpiceConsole(), ['id' => $this->id, 'type' => $type]);
 
@@ -357,7 +355,7 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
      *
      * @param string $type the type of VNC console: serial
      */
-    public function getSerialConsole($type = Enum::CONSOLE_SERIAL): array
+    public function getSerialConsole($type = Enum::CONSOLE_SERIAL)
     {
         $response = $this->execute($this->api->getSerialConsole(), ['id' => $this->id, 'type' => $type]);
 
@@ -382,7 +380,7 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
      *
      * @return array An array containing to two keys: "public" and "private"
      */
-    public function listAddresses(array $options = []): array
+    public function listAddresses(array $options = [])
     {
         $options['id'] = $this->id;
 
@@ -395,7 +393,7 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
     /**
      * Returns Generator for InterfaceAttachment.
      */
-    public function listInterfaceAttachments(array $options = []): \Generator
+    public function listInterfaceAttachments(array $options = [])
     {
         return $this->model(InterfaceAttachment::class)->enumerate($this->api->getInterfaceAttachments(), ['id' => $this->id]);
     }
@@ -405,7 +403,7 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
      *
      * @param string $portId the unique ID of the port
      */
-    public function getInterfaceAttachment(string $portId): InterfaceAttachment
+    public function getInterfaceAttachment($portId)
     {
         $response = $this->execute($this->api->getInterfaceAttachment(), [
             'id'     => $this->id,
@@ -420,7 +418,7 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
      *
      * @param array $userOptions {@see \OpenStack\Compute\v2\Api::postInterfaceAttachment}
      */
-    public function createInterfaceAttachment(array $userOptions): InterfaceAttachment
+    public function createInterfaceAttachment(array $userOptions)
     {
         if (!isset($userOptions['networkId']) && !isset($userOptions['portId'])) {
             throw new \RuntimeException('networkId or portId must be set.');
@@ -434,7 +432,7 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
     /**
      * Detaches an interface attachment.
      */
-    public function detachInterface(string $portId)
+    public function detachInterface($portId)
     {
         $this->execute($this->api->deleteInterfaceAttachment(), [
             'id'     => $this->id,
@@ -445,7 +443,7 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
     /**
      * Retrieves metadata from the API.
      */
-    public function getMetadata(): array
+    public function getMetadata()
     {
         $response = $this->execute($this->api->getServerMetadata(), ['id' => $this->id]);
 
@@ -486,7 +484,7 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
      *
      * @return mixed
      */
-    public function getMetadataItem(string $key)
+    public function getMetadataItem($key)
     {
         $response             = $this->execute($this->api->getServerMetadataKey(), ['id' => $this->id, 'key' => $key]);
         $value                = $this->parseMetadata($response)[$key];
@@ -500,7 +498,7 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
      *
      * @param string $key {@see \OpenStack\Compute\v2\Api::deleteServerMetadataKey}
      */
-    public function deleteMetadataItem(string $key)
+    public function deleteMetadataItem($key)
     {
         if (isset($this->metadata[$key])) {
             unset($this->metadata[$key]);
@@ -514,7 +512,7 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
      *
      * @param array $options {@see \OpenStack\Compute\v2\Api::postSecurityGroup}
      */
-    public function addSecurityGroup(array $options): SecurityGroup
+    public function addSecurityGroup(array $options)
     {
         $options['id'] = $this->id;
 
@@ -534,7 +532,7 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
         $this->execute($this->api->deleteSecurityGroup(), $options);
     }
 
-    public function parseMetadata(ResponseInterface $response): array
+    public function parseMetadata(ResponseInterface $response)
     {
         return Utils::jsonDecode($response)['metadata'];
     }
@@ -542,7 +540,7 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
     /**
      * Returns Generator for SecurityGroups.
      */
-    public function listSecurityGroups(): \Generator
+    public function listSecurityGroups()
     {
         return $this->model(SecurityGroup::class)->enumerate($this->api->getSecurityGroups(), ['id' => $this->id]);
     }
@@ -550,7 +548,7 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
     /**
      * Returns Generator for VolumeAttachment.
      */
-    public function listVolumeAttachments(): \Generator
+    public function listVolumeAttachments()
     {
         return $this->model(VolumeAttachment::class)->enumerate($this->api->getVolumeAttachments(), ['id' => $this->id]);
     }
@@ -560,7 +558,7 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
      *
      * @param $volumeId
      */
-    public function attachVolume(string $volumeId): VolumeAttachment
+    public function attachVolume($volumeId)
     {
         $response = $this->execute($this->api->postVolumeAttachments(), ['id' => $this->id, 'volumeId' => $volumeId]);
 
@@ -572,7 +570,7 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
      *
      * @param $attachmentId
      */
-    public function detachVolume(string $attachmentId)
+    public function detachVolume($attachmentId)
     {
         $this->execute($this->api->deleteVolumeAttachments(), ['id' => $this->id, 'attachmentId' => $attachmentId]);
     }

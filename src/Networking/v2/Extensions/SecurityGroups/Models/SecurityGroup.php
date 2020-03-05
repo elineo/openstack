@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Networking\v2\Extensions\SecurityGroups\Models;
 
 use OpenStack\Common\Resource\Alias;
@@ -54,7 +52,7 @@ class SecurityGroup extends OperatorResource implements Creatable, Listable, Del
     /**
      * {@inheritdoc}
      */
-    protected function getAliases(): array
+    protected function getAliases()
     {
         return parent::getAliases() + [
             'security_group_rules' => new Alias('securityGroupRules', SecurityGroupRule::class, true),
@@ -65,7 +63,7 @@ class SecurityGroup extends OperatorResource implements Creatable, Listable, Del
     /**
      * {@inheritdoc}
      */
-    public function create(array $userOptions): Creatable
+    public function create(array $userOptions)
     {
         $response = $this->execute($this->api->postSecurityGroups(), $userOptions);
 

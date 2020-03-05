@@ -1,14 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Identity\v3;
 
 use OpenStack\Common\Api\AbstractParams;
 
 class Params extends AbstractParams
 {
-    public function methods(): array
+    public function methods()
     {
         return [
             'type'        => self::ARRAY_TYPE,
@@ -21,7 +19,7 @@ EOT
         ];
     }
 
-    public function user(): array
+    public function user()
     {
         return [
             'type'       => self::OBJECT_TYPE,
@@ -44,7 +42,7 @@ EOT
         ];
     }
 
-    public function tokenBody(): array
+    public function tokenBody()
     {
         return [
             'path'        => 'auth.identity.token',
@@ -54,7 +52,7 @@ EOT
         ];
     }
 
-    public function scope(): array
+    public function scope()
     {
         return [
             'type'       => self::OBJECT_TYPE,
@@ -66,7 +64,7 @@ EOT
         ];
     }
 
-    public function typeQuery(): array
+    public function typeQuery()
     {
         return [
             'type'        => 'string',
@@ -75,7 +73,7 @@ EOT
         ];
     }
 
-    public function interf(): array
+    public function interf()
     {
         return [
             'description' => <<<EOT
@@ -86,7 +84,7 @@ EOT
         ];
     }
 
-    public function region(): array
+    public function region()
     {
         return [
             'description' => <<<EOT
@@ -96,7 +94,7 @@ EOT
         ];
     }
 
-    public function endpointUrl(): array
+    public function endpointUrl()
     {
         return [
             'description' => <<<EOT
@@ -105,7 +103,7 @@ EOT
         ];
     }
 
-    public function serviceId(): array
+    public function serviceId()
     {
         return [
             'type'        => 'string',
@@ -114,7 +112,7 @@ EOT
         ];
     }
 
-    public function password(): array
+    public function password()
     {
         return [
             'description' => <<<EOT
@@ -124,14 +122,14 @@ EOT
         ];
     }
 
-    public function email(): array
+    public function email()
     {
         return [
             'description' => 'The personal e-mail address of the user',
         ];
     }
 
-    public function effective(): array
+    public function effective()
     {
         return [
             'type'        => self::BOOL_TYPE,
@@ -150,7 +148,7 @@ EOT
         ];
     }
 
-    public function projectIdQuery(): array
+    public function projectIdQuery()
     {
         return [
             'sentAs'      => 'scope.project.id',
@@ -159,7 +157,7 @@ EOT
         ];
     }
 
-    public function domainIdQuery(): array
+    public function domainIdQuery()
     {
         return [
             'sentAs'      => 'scope.domain.id',
@@ -168,7 +166,7 @@ EOT
         ];
     }
 
-    public function roleIdQuery(): array
+    public function roleIdQuery()
     {
         return [
             'sentAs'      => 'role.id',
@@ -177,7 +175,7 @@ EOT
         ];
     }
 
-    public function groupIdQuery(): array
+    public function groupIdQuery()
     {
         return [
             'sentAs'      => 'group.id',
@@ -186,7 +184,7 @@ EOT
         ];
     }
 
-    public function userIdQuery(): array
+    public function userIdQuery()
     {
         return [
             'sentAs'      => 'user.id',
@@ -195,7 +193,7 @@ EOT
         ];
     }
 
-    public function domain(): array
+    public function domain()
     {
         return [
             'type'       => 'object',
@@ -206,7 +204,7 @@ EOT
         ];
     }
 
-    public function project(): array
+    public function project()
     {
         return [
             'type'       => 'object',
@@ -227,7 +225,7 @@ EOT
         ];
     }
 
-    public function tokenId(): array
+    public function tokenId()
     {
         return [
             'location'    => self::HEADER,
@@ -244,7 +242,7 @@ EOT
         ];
     }
 
-    public function parentId(): array
+    public function parentId()
     {
         return [
             'sentAs'      => 'parent_id',
@@ -281,7 +279,7 @@ EOT
         ];
     }
 
-    public function defaultProjectId(): array
+    public function defaultProjectId()
     {
         return [
             'sentAs'      => 'default_project_id',
@@ -292,7 +290,7 @@ EOT
         ];
     }
 
-    public function projectId(): array
+    public function projectId()
     {
         return [
             'sentAs'      => 'project_id',
@@ -300,7 +298,7 @@ EOT
         ];
     }
 
-    public function userId(): array
+    public function userId()
     {
         return [
             'sentAs'      => 'user_id',
@@ -308,7 +306,7 @@ EOT
         ];
     }
 
-    public function blob(): array
+    public function blob()
     {
         return [
             'type'        => 'string',

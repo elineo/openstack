@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\ObjectStore\v1;
 
 use OpenStack\Common\Api\AbstractApi;
@@ -13,7 +11,7 @@ class Api extends AbstractApi
         $this->params = new Params();
     }
 
-    public function getAccount(): array
+    public function getAccount()
     {
         return [
             'method' => 'GET',
@@ -30,7 +28,7 @@ class Api extends AbstractApi
         ];
     }
 
-    public function postAccount(): array
+    public function postAccount()
     {
         return [
             'method' => 'POST',
@@ -44,7 +42,7 @@ class Api extends AbstractApi
         ];
     }
 
-    public function headAccount(): array
+    public function headAccount()
     {
         return [
             'method' => 'HEAD',
@@ -53,7 +51,7 @@ class Api extends AbstractApi
         ];
     }
 
-    public function getContainer(): array
+    public function getContainer()
     {
         return [
             'method' => 'GET',
@@ -72,7 +70,7 @@ class Api extends AbstractApi
         ];
     }
 
-    public function putContainer(): array
+    public function putContainer()
     {
         return [
             'method' => 'PUT',
@@ -93,7 +91,7 @@ class Api extends AbstractApi
         ];
     }
 
-    public function deleteContainer(): array
+    public function deleteContainer()
     {
         return [
             'method' => 'DELETE',
@@ -104,7 +102,7 @@ class Api extends AbstractApi
         ];
     }
 
-    public function postContainer(): array
+    public function postContainer()
     {
         return [
             'method' => 'POST',
@@ -127,7 +125,7 @@ class Api extends AbstractApi
         ];
     }
 
-    public function headContainer(): array
+    public function headContainer()
     {
         return [
             'method' => 'HEAD',
@@ -136,7 +134,7 @@ class Api extends AbstractApi
         ];
     }
 
-    public function getObject(): array
+    public function getObject()
     {
         return [
             'method' => 'GET',
@@ -153,7 +151,7 @@ class Api extends AbstractApi
         ];
     }
 
-    public function putObject(): array
+    public function putObject()
     {
         return [
             'method' => 'PUT',
@@ -178,7 +176,7 @@ class Api extends AbstractApi
         ];
     }
 
-    public function copyObject(): array
+    public function copyObject()
     {
         return [
             'method' => 'COPY',
@@ -196,7 +194,7 @@ class Api extends AbstractApi
         ];
     }
 
-    public function deleteObject(): array
+    public function deleteObject()
     {
         return [
             'method' => 'DELETE',
@@ -208,7 +206,7 @@ class Api extends AbstractApi
         ];
     }
 
-    public function headObject(): array
+    public function headObject()
     {
         return [
             'method' => 'HEAD',
@@ -220,7 +218,7 @@ class Api extends AbstractApi
         ];
     }
 
-    public function postObject(): array
+    public function postObject()
     {
         return [
             'method' => 'POST',

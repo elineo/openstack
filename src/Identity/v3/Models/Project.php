@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Identity\v3\Models;
 
 use OpenStack\Common\Error\BadResponseError;
@@ -51,7 +49,7 @@ class Project extends OperatorResource implements Creatable, Retrievable, Listab
      *
      * @param array $data {@see \OpenStack\Identity\v3\Api::postProjects}
      */
-    public function create(array $data): Creatable
+    public function create(array $data)
     {
         $response = $this->execute($this->api->postProjects(), $data);
         $this->populateFromResponse($response);
@@ -88,7 +86,7 @@ class Project extends OperatorResource implements Creatable, Retrievable, Listab
     /**
      * @param array $options {@see \OpenStack\Identity\v3\Api::getProjectUserRoles}
      */
-    public function listUserRoles(array $options = []): \Generator
+    public function listUserRoles(array $options = [])
     {
         $options['projectId'] = $this->id;
 
@@ -106,7 +104,7 @@ class Project extends OperatorResource implements Creatable, Retrievable, Listab
     /**
      * @param array $options {@see \OpenStack\Identity\v3\Api::headProjectUserRole}
      */
-    public function checkUserRole(array $options): bool
+    public function checkUserRole(array $options)
     {
         try {
             $this->execute($this->api->headProjectUserRole(), ['projectId' => $this->id] + $options);
@@ -128,7 +126,7 @@ class Project extends OperatorResource implements Creatable, Retrievable, Listab
     /**
      * @param array $options {@see \OpenStack\Identity\v3\Api::getProjectGroupRoles}
      */
-    public function listGroupRoles(array $options = []): \Generator
+    public function listGroupRoles(array $options = [])
     {
         $options['projectId'] = $this->id;
 
@@ -146,7 +144,7 @@ class Project extends OperatorResource implements Creatable, Retrievable, Listab
     /**
      * @param array $options {@see \OpenStack\Identity\v3\Api::headProjectGroupRole}
      */
-    public function checkGroupRole(array $options): bool
+    public function checkGroupRole(array $options)
     {
         try {
             $this->execute($this->api->headProjectGroupRole(), ['projectId' => $this->id] + $options);

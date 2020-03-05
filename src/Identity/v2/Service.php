@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Identity\v2;
 
 use GuzzleHttp\ClientInterface;
@@ -17,12 +15,12 @@ use OpenStack\Identity\v2\Models\Token;
  */
 class Service extends AbstractService implements IdentityService
 {
-    public static function factory(ClientInterface $client): self
+    public static function factory(ClientInterface $client)
     {
         return new static($client, new Api());
     }
 
-    public function authenticate(array $options = []): array
+    public function authenticate(array $options = [])
     {
         $definition = $this->api->postToken();
 
@@ -47,7 +45,7 @@ class Service extends AbstractService implements IdentityService
      *
      * @return Models\Token
      */
-    public function generateToken(array $options = []): Token
+    public function generateToken(array $options = [])
     {
         $response = $this->execute($this->api->postToken(), $options);
 

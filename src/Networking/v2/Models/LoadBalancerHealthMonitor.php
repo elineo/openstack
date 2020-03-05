@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Networking\v2\Models;
 
 use OpenStack\Common\Resource\Alias;
@@ -107,7 +105,7 @@ class LoadBalancerHealthMonitor extends OperatorResource implements Creatable, R
     /**
      * {@inheritdoc}
      */
-    protected function getAliases(): array
+    protected function getAliases()
     {
         return parent::getAliases() + [
             'pools' => new Alias('pools', LoadBalancerPool::class, true),
@@ -117,7 +115,7 @@ class LoadBalancerHealthMonitor extends OperatorResource implements Creatable, R
     /**
      * {@inheritdoc}
      */
-    public function create(array $userOptions): Creatable
+    public function create(array $userOptions)
     {
         $response = $this->execute($this->api->postLoadBalancerHealthMonitor(), $userOptions);
 

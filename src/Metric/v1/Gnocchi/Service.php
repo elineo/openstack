@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Metric\v1\Gnocchi;
 
 use OpenStack\Common\Service\AbstractService;
@@ -19,7 +17,7 @@ class Service extends AbstractService
     /**
      * Retrieves a collection of \OpenStack\Metric\v1\Gnocchi\Models\ResourceType type in a generator format.
      */
-    public function listResourceTypes(): \Generator
+    public function listResourceTypes()
     {
         return $this->model(ResourceType::class)->enumerate($this->api->getResourceTypes(), []);
     }
@@ -29,7 +27,7 @@ class Service extends AbstractService
      *
      * @param array $options {@see \OpenStack\Metric\v1\Gnocchi\Api::getResources}
      */
-    public function listResources(array $options = []): \Generator
+    public function listResources(array $options = [])
     {
         $this->injectGenericType($options);
 
@@ -40,7 +38,7 @@ class Service extends AbstractService
      * Retrieves a Resource object and populates its unique identifier object. This operation will not perform a GET or
      * HEAD request by default; you will need to call retrieve() if you want to pull in remote state from the API.
      */
-    public function getResource(array $options = []): Resource
+    public function getResource(array $options = [])
     {
         $this->injectGenericType($options);
 
@@ -56,7 +54,7 @@ class Service extends AbstractService
      *
      * @param array $options {@see \OpenStack\Metric\v1\Gnocchi\Api::searchResources}
      */
-    public function searchResources(array $options = []): \Generator
+    public function searchResources(array $options = [])
     {
         $this->injectGenericType($options);
 
@@ -81,7 +79,7 @@ class Service extends AbstractService
      * Retrieves a Metric object and populates its unique identifier object. This operation will not perform a GET or
      * HEAD request by default; you will need to call retrieve() if you want to pull in remote state from the API.
      */
-    public function getMetric(string $id): Metric
+    public function getMetric($id)
     {
         /** @var Metric $metric */
         $metric = $this->model(Metric::class);
@@ -95,7 +93,7 @@ class Service extends AbstractService
      *
      * @param array $options {@see \OpenStack\Metric\v1\Gnocchi\Api::getMetrics}
      */
-    public function listMetrics(array $options = []): \Generator
+    public function listMetrics(array $options = [])
     {
         return $this->model(Metric::class)->enumerate($this->api->getMetrics(), $options);
     }

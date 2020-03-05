@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Identity\v3\Models;
 
 use OpenStack\Common\Resource\Creatable;
@@ -47,7 +45,7 @@ class Policy extends OperatorResource implements Creatable, Listable, Retrievabl
      *
      * @param array $data {@see \OpenStack\Identity\v3\Api::postPolicies}
      */
-    public function create(array $data): Creatable
+    public function create(array $data)
     {
         $response = $this->execute($this->api->postPolicies(), $data);
 

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Images\v2\Models;
 
 use JsonSchema\Validator;

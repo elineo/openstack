@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\BlockStorage\v2;
 
 use OpenStack\BlockStorage\v2\Models\QuotaSet;
@@ -20,6 +18,8 @@ class Service extends AbstractService
      * You must have enough volume storage quota remaining to create a volume of size requested.
      *
      * @param array $userOptions {@see Api::postVolumes}
+     *
+     * @return Volume
      */
     public function createVolume(array $userOptions): Volume
     {
@@ -31,8 +31,10 @@ class Service extends AbstractService
      *
      * @param bool  $detail      if set to TRUE, more information will be returned
      * @param array $userOptions {@see Api::getVolumes}
+     *
+     * @return
      */
-    public function listVolumes(bool $detail = false, array $userOptions = []): \Generator
+    public function listVolumes($detail = false, array $userOptions = [])
     {
         $def = (true === $detail) ? $this->api->getVolumesDetail() : $this->api->getVolumes();
 
@@ -41,8 +43,10 @@ class Service extends AbstractService
 
     /**
      * @param string $volumeId the UUID of the volume being retrieved
+     *
+     * @return mixed
      */
-    public function getVolume(string $volumeId): Volume
+    public function getVolume($volumeId)
     {
         $volume = $this->model(Volume::class);
         $volume->populateFromArray(['id' => $volumeId]);
@@ -52,18 +56,20 @@ class Service extends AbstractService
 
     /**
      * @param array $userOptions {@see Api::postTypes}
+     *
+     * @return
      */
-    public function createVolumeType(array $userOptions): VolumeType
+    public function createVolumeType(array $userOptions)
     {
         return $this->model(VolumeType::class)->create($userOptions);
     }
 
-    public function listVolumeTypes(): \Generator
+    public function listVolumeTypes()
     {
         return $this->model(VolumeType::class)->enumerate($this->api->getTypes(), []);
     }
 
-    public function getVolumeType(string $typeId): VolumeType
+    public function getVolumeType($typeId)
     {
         $type = $this->model(VolumeType::class);
         $type->populateFromArray(['id' => $typeId]);
@@ -73,20 +79,22 @@ class Service extends AbstractService
 
     /**
      * @param array $userOptions {@see Api::postSnapshots}
+     *
+     * @return
      */
-    public function createSnapshot(array $userOptions): Snapshot
+    public function createSnapshot(array $userOptions)
     {
         return $this->model(Snapshot::class)->create($userOptions);
     }
 
-    public function listSnapshots(bool $detail = false, array $userOptions = []): \Generator
+    public function listSnapshots($detail = false, array $userOptions = [])
     {
         $def = (true === $detail) ? $this->api->getSnapshotsDetail() : $this->api->getSnapshots();
 
         return $this->model(Snapshot::class)->enumerate($def, $userOptions);
     }
 
-    public function getSnapshot(string $snapshotId): Snapshot
+    public function getSnapshot($snapshotId)
     {
         $snapshot = $this->model(Snapshot::class);
         $snapshot->populateFromArray(['id' => $snapshotId]);
@@ -97,7 +105,7 @@ class Service extends AbstractService
     /**
      * Shows A Quota for a tenant.
      */
-    public function getQuotaSet(string $tenantId): QuotaSet
+    public function getQuotaSet($tenantId)
     {
         $quotaSet = $this->model(QuotaSet::class);
         $quotaSet->populateFromResponse($this->execute($this->api->getQuotaSet(), ['tenantId' => $tenantId]));

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\ObjectStore\v1\Models;
 
 use GuzzleHttp\Promise\Promise;
@@ -41,7 +39,7 @@ class Container extends OperatorResource implements Creatable, Deletable, Retrie
     /**
      * {@inheritdoc}
      */
-    public function populateFromResponse(ResponseInterface $response): self
+    public function populateFromResponse(ResponseInterface $response)
     {
         parent::populateFromResponse($response);
 
@@ -58,7 +56,7 @@ class Container extends OperatorResource implements Creatable, Deletable, Retrie
      * @param array         $options {@see \OpenStack\ObjectStore\v1\Api::getContainer}
      * @param callable|null $mapFn   allows a function to be mapped over each element
      */
-    public function listObjects(array $options = [], callable $mapFn = null): \Generator
+    public function listObjects(array $options = [], callable $mapFn = null)
     {
         $options = array_merge($options, ['name' => $this->name, 'format' => 'json']);
 
@@ -86,7 +84,7 @@ class Container extends OperatorResource implements Creatable, Deletable, Retrie
      *
      * @return $this
      */
-    public function create(array $data): Creatable
+    public function create(array $data)
     {
         $response = $this->execute($this->api->putContainer(), $data);
 
@@ -137,7 +135,7 @@ class Container extends OperatorResource implements Creatable, Deletable, Retrie
     /**
      * {@inheritdoc}
      */
-    public function getMetadata(): array
+    public function getMetadata()
     {
         $response = $this->executeWithState($this->api->headContainer());
 
@@ -151,7 +149,7 @@ class Container extends OperatorResource implements Creatable, Deletable, Retrie
      *
      * @param string $name The name of the object
      */
-    public function getObject($name): StorageObject
+    public function getObject($name)
     {
         return $this->model(StorageObject::class, ['containerName' => $this->name, 'name' => $name]);
     }
@@ -166,7 +164,7 @@ class Container extends OperatorResource implements Creatable, Deletable, Retrie
      * @throws BadResponseError for any other HTTP error which does not have a 404 Not Found status
      * @throws \Exception       for any other type of fatal error
      */
-    public function objectExists(string $name): bool
+    public function objectExists($name)
     {
         try {
             $this->getObject($name)->retrieve();
@@ -187,7 +185,7 @@ class Container extends OperatorResource implements Creatable, Deletable, Retrie
      *
      * @return object
      */
-    public function createObject(array $data): StorageObject
+    public function createObject(array $data)
     {
         return $this->model(StorageObject::class)->create($data + ['containerName' => $this->name]);
     }
@@ -203,7 +201,7 @@ class Container extends OperatorResource implements Creatable, Deletable, Retrie
      * @param string $data['segmentPrefix']    The prefix that will come before each segment. If omitted, a default
      *                                         is used: name/timestamp/filesize
      */
-    public function createLargeObject(array $data): StorageObject
+    public function createLargeObject(array $data)
     {
         /** @var \Psr\Http\Message\StreamInterface $stream */
         $stream = $data['stream'];

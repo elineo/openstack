@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Identity\v2\Models;
 
 use OpenStack\Common\Resource\Alias;
@@ -24,7 +22,7 @@ class Entry extends OperatorResource
     /**
      * {@inheritdoc}
      */
-    protected function getAliases(): array
+    protected function getAliases()
     {
         return parent::getAliases() + [
             'endpoints' => new Alias('endpoints', Endpoint::class, true),
@@ -36,7 +34,7 @@ class Entry extends OperatorResource
      *
      * @return bool TRUE if it's a match, FALSE if not
      */
-    public function matches(string $name, string $type): bool
+    public function matches($name, $type)
     {
         return $this->name == $name && $this->type == $type;
     }
@@ -44,7 +42,7 @@ class Entry extends OperatorResource
     /**
      * Retrieves the catalog entry's URL according to a specific region and URL type.
      */
-    public function getEndpointUrl(string $region, string $urlType): string
+    public function getEndpointUrl($region, $urlType)
     {
         foreach ($this->endpoints as $endpoint) {
             if ($endpoint->supportsRegion($region) && $endpoint->supportsUrlType($urlType)) {

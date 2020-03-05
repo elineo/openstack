@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Common\Transport;
 
 use function GuzzleHttp\Psr7\uri_for;
@@ -10,7 +8,7 @@ use Psr\Http\Message\UriInterface;
 
 class Utils
 {
-    public static function jsonDecode(ResponseInterface $response, bool $assoc = true)
+    public static function jsonDecode(ResponseInterface $response, $assoc = true)
     {
         $jsonErrors = [
             JSON_ERROR_DEPTH          => 'JSON_ERROR_DEPTH - Maximum stack depth exceeded',
@@ -44,7 +42,7 @@ class Utils
      *
      * @return array
      */
-    public static function flattenJson($data, string $key = null)
+    public static function flattenJson($data, $key = null)
     {
         return (!empty($data) && $key && isset($data[$key])) ? $data[$key] : $data;
     }
@@ -57,7 +55,7 @@ class Utils
      *
      * @param string $url the url representation
      */
-    public static function normalizeUrl(string $url): string
+    public static function normalizeUrl($url)
     {
         if (false === strpos($url, 'http')) {
             $url = 'http://'.$url;
@@ -69,14 +67,18 @@ class Utils
     /**
      * Add an unlimited list of paths to a given URI.
      *
-     * @param ...$paths
      */
-    public static function addPaths(UriInterface $uri, ...$paths): UriInterface
+    public static function addPaths()
     {
-        return uri_for(rtrim((string) $uri, '/').'/'.implode('/', $paths));
+        $arg_list = func_get_args();
+
+        $uri = $arg_list[0];
+        array_shift($arg_list);
+
+        return uri_for(rtrim((string) $uri, '/').'/'.implode('/', $arg_list));
     }
 
-    public static function appendPath(UriInterface $uri, $path): UriInterface
+    public static function appendPath(UriInterface $uri, $path)
     {
         return uri_for(rtrim((string) $uri, '/').'/'.$path);
     }

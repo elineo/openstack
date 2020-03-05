@@ -90,7 +90,7 @@ class Params extends \OpenStack\Networking\v2\Params
         ];
     }
 
-    public function filterName(): array
+    public function filterName()
     {
         return [
             'description' => sprintf('Filter the list result by the human-readable name of the resource'),

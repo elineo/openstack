@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Identity\v3\Models;
 
 use OpenStack\Common\Resource\Alias;
@@ -18,14 +16,14 @@ class Catalog extends OperatorResource implements \OpenStack\Common\Auth\Catalog
     /**
      * {@inheritdoc}
      */
-    protected function getAliases(): array
+    protected function getAliases()
     {
         return parent::getAliases() + [
             'services' => new Alias('services', Service::class, true),
         ];
     }
 
-    public function populateFromArray(array $data): self
+    public function populateFromArray(array $data)
     {
         foreach ($data as $service) {
             $this->services[] = $this->model(Service::class, $service);
@@ -44,7 +42,7 @@ class Catalog extends OperatorResource implements \OpenStack\Common\Auth\Catalog
      *
      * @return false|string FALSE if no URL found
      */
-    public function getServiceUrl(string $name, string $type, string $region, string $urlType): string
+    public function getServiceUrl($name, $type, $region, $urlType)
     {
         if (empty($this->services)) {
             throw new \RuntimeException('No services are defined');

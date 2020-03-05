@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Common\Transport;
 
 use OpenStack\Common\Api\Operation;
@@ -16,7 +14,7 @@ class RequestSerializer
         $this->jsonSerializer = $jsonSerializer ?: new JsonSerializer();
     }
 
-    public function serializeOptions(Operation $operation, array $userValues = []): array
+    public function serializeOptions(Operation $operation, array $userValues = [])
     {
         $options = ['headers' => []];
 

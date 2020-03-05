@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Identity\v3\Models;
 
 use OpenStack\Common\Resource\Alias;
@@ -51,7 +49,7 @@ class Token extends OperatorResource implements Creatable, Retrievable, \OpenSta
     /**
      * {@inheritdoc}
      */
-    protected function getAliases(): array
+    protected function getAliases()
     {
         return parent::getAliases() + [
             'roles'      => new Alias('roles', Role::class, true),
@@ -74,7 +72,7 @@ class Token extends OperatorResource implements Creatable, Retrievable, \OpenSta
         return $this;
     }
 
-    public function getId(): string
+    public function getId()
     {
         return $this->id;
     }
@@ -82,7 +80,7 @@ class Token extends OperatorResource implements Creatable, Retrievable, \OpenSta
     /**
      * @return bool TRUE if the token has expired (and is invalid); FALSE otherwise
      */
-    public function hasExpired(): bool
+    public function hasExpired()
     {
         return $this->expires <= new \DateTimeImmutable('now', $this->expires->getTimezone());
     }
@@ -101,7 +99,7 @@ class Token extends OperatorResource implements Creatable, Retrievable, \OpenSta
      *
      * @param array $data {@see \OpenStack\Identity\v3\Api::postTokens}
      */
-    public function create(array $data): Creatable
+    public function create(array $data)
     {
         if (isset($data['user'])) {
             $data['methods'] = ['password'];
@@ -132,7 +130,7 @@ class Token extends OperatorResource implements Creatable, Retrievable, \OpenSta
      *
      * This array is a modified version of response from `/auth/tokens`. Do not manually modify this array.
      */
-    public function export(): array
+    public function export()
     {
         return $this->cachedToken;
     }

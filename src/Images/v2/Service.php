@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenStack\Images\v2;
 
 use OpenStack\Common\Service\AbstractService;
@@ -12,12 +10,12 @@ use OpenStack\Images\v2\Models\Image;
  */
 class Service extends AbstractService
 {
-    public function createImage(array $data): Image
+    public function createImage(array $data)
     {
         return $this->model(Image::class)->create($data);
     }
 
-    public function listImages(array $data = []): \Generator
+    public function listImages(array $data = [])
     {
         return $this->model(Image::class)->enumerate($this->api->getImages(), $data);
     }
@@ -25,7 +23,7 @@ class Service extends AbstractService
     /**
      * @param null $id
      */
-    public function getImage($id = null): Image
+    public function getImage($id = null)
     {
         $image = $this->model(Image::class);
         $image->populateFromArray(['id' => $id]);

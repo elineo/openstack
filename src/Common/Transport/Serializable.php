@@ -7,5 +7,5 @@ interface Serializable
     /**
      * @return string
      */
-    public function serialize(): \stdClass;
+    public function serialize();
 }
