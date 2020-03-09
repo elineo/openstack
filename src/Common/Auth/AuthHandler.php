@@ -57,7 +57,7 @@ class AuthHandler
      * Internal method which prevents infinite recursion. For certain requests, like the initial
      * auth call itself, we do NOT want to send a token.
      */
-    private function shouldIgnore(RequestInterface $request): bool
+    private function shouldIgnore(RequestInterface $request)
     {
         return false !== strpos((string) $request->getUri(), 'tokens') && 'POST' == $request->getMethod();
     }
