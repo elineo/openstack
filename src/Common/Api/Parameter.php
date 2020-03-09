@@ -159,7 +159,7 @@ class Parameter
     /**
      * Retrieve the name that will be used over the wire.
      */
-    public function getName(): string
+    public function getName()
     {
         return $this->sentAs ?: $this->name;
     }
@@ -167,7 +167,7 @@ class Parameter
     /**
      * Indicates whether the user must provide a value for this parameter.
      */
-    public function isRequired(): bool
+    public function isRequired()
     {
         return true === $this->required;
     }
@@ -181,7 +181,7 @@ class Parameter
      *
      * @throws \Exception If validation fails
      */
-    public function validate($userValues): bool
+    public function validate($userValues)
     {
         $this->validateEnums($userValues);
         $this->validateType($userValues);
@@ -233,7 +233,7 @@ class Parameter
      *
      * @throws \Exception
      */
-    private function getNestedProperty($key): Parameter
+    private function getNestedProperty($key)
     {
         if ($this->name && false !== stripos($this->name, 'metadata') && $this->properties instanceof Parameter) {
             return $this->properties;
@@ -250,7 +250,7 @@ class Parameter
      *
      * @param $userValue The value being checked
      */
-    private function hasCorrectType($userValue): bool
+    private function hasCorrectType($userValue)
     {
         // Helper fn to see whether an array is associative (i.e. a JSON object)
         $isAssociative = function ($value) {
@@ -282,7 +282,7 @@ class Parameter
     /**
      * Indicates whether this parameter represents an array type.
      */
-    public function isArray(): bool
+    public function isArray()
     {
         return 'array' == $this->type && $this->itemSchema instanceof Parameter;
     }
@@ -290,12 +290,12 @@ class Parameter
     /**
      * Indicates whether this parameter represents an object type.
      */
-    public function isObject(): bool
+    public function isObject()
     {
         return 'object' == $this->type && !empty($this->properties);
     }
 
-    public function getLocation(): string
+    public function getLocation()
     {
         return $this->location;
     }
@@ -305,7 +305,7 @@ class Parameter
      *
      * @param $value
      */
-    public function hasLocation($value): bool
+    public function hasLocation($value)
     {
         return $this->location == $value;
     }
@@ -315,7 +315,7 @@ class Parameter
      *
      * @return string|null
      */
-    public function getPath(): string
+    public function getPath()
     {
         return $this->path;
     }
@@ -333,7 +333,7 @@ class Parameter
     /**
      * Sets the name of the parameter to a new value.
      */
-    public function setName(string $name)
+    public function setName($name)
     {
         $this->name = $name;
     }
@@ -345,7 +345,7 @@ class Parameter
      *
      * @return Parameter|null
      */
-    public function getProperty(string $name)
+    public function getProperty($name)
     {
         if ($this->properties instanceof Parameter) {
             $this->properties->setName($name);
@@ -361,12 +361,12 @@ class Parameter
      *
      * @return string|null
      */
-    public function getPrefix(): string
+    public function getPrefix()
     {
         return $this->prefix;
     }
 
-    public function getPrefixedName(): string
+    public function getPrefixedName()
     {
         return $this->prefix.$this->getName();
     }
