@@ -2,7 +2,6 @@
 
 namespace OpenStack\Common\Transport;
 
-use function GuzzleHttp\Psr7\uri_for;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
@@ -75,11 +74,11 @@ class Utils
         $uri = $arg_list[0];
         array_shift($arg_list);
 
-        return uri_for(rtrim((string) $uri, '/').'/'.implode('/', $arg_list));
+        return \GuzzleHttp\Psr7\uri_for(rtrim((string) $uri, '/').'/'.implode('/', $arg_list));
     }
 
     public static function appendPath(UriInterface $uri, $path)
     {
-        return uri_for(rtrim((string) $uri, '/').'/'.$path);
+        return \GuzzleHttp\Psr7\uri_for(rtrim((string) $uri, '/').'/'.$path);
     }
 }
